@@ -1,8 +1,8 @@
+from __future__ import print_function
+
 from sklearn.datasets import fetch_mldata
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
-from __future__ import print_function
-
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 import numpy as np
