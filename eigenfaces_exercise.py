@@ -18,6 +18,7 @@ d = height * width
 
 # TODO: access principal components (lookup how to do that)
 
+# Make square grid
 plot_width = int(ceil(sqrt(n_pc)))
 for i in range(n_pc):
 	plt.subplot(plot_width, plot_width, i + 1)

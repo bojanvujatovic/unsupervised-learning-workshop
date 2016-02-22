@@ -7,8 +7,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+# Create plot of appropriate size
 plt.figure(figsize=(12, 12))
 
+# Make initial blobs with fixed random seed
 n_samples = 1500
 random_state = 170
 X, y = make_blobs(n_samples=n_samples, random_state=random_state)

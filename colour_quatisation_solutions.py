@@ -21,18 +21,22 @@ china = load_sample_image("china.jpg")
 # (need to be in the range [0-1])
 china = np.array(china) / 255.0
 
-# Load Image and transform to a 2D numpy array.
+# Load Image and transform to a 2D numpy array
 width, height, channels = tuple(china.shape)
 image_array = np.reshape(china, (width * height, channels))
 
-image_array_sample = shuffle(image_array, random_state=0)[:1000]
-kmeans = KMeans(n_clusters=k, random_state=0).fit(image_array_sample)
+# Initialise KMeans with k clusters
+kmeans = KMeans(n_clusters=k, random_state=0)
 
+# Fit KMeans with sample from image colours (faster)
+image_array_sample = shuffle(image_array, random_state=0)[:1000]
+kmeans.fit(image_array_sample)
+
+# Run k-means algorithm for the iamge and get the cluster labels for each pixel
 labels = kmeans.predict(image_array)
 
-
+# Compress the image - transform every pixel with its cluster centroid
 def recreate_image(image, codebook, labels, width, height):
-    """Recreate the (compressed) image from the code book & labels"""
     channels = codebook.shape[1]
     image = np.zeros((width, height, channels))
     label_idx = 0
@@ -42,7 +46,7 @@ def recreate_image(image, codebook, labels, width, height):
             label_idx += 1
     return image
 
-# Display all results, alongside original image
+# Display the results, alongside original image
 plt.figure(figsize=(16,6))
 
 plt.subplot(1, 2, 1)

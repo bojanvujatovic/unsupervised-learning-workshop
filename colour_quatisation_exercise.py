@@ -29,21 +29,20 @@ image_array = np.reshape(china, (width * height, channels))
 
 # TODO: fit KMeans with image colours OR sample from image colours (faster)
 
-# TODO: get the cluster labels from KMeans
+# TODO: run k-means algorithm for the iamge and get the cluster labels for each pixel
 
+# Compress the image - transform every pixel with its cluster centroid
 def recreate_image(image, codebook, labels, width, height):
-    """Recreate the (compressed) image from the code book & labels"""
     channels = codebook.shape[1]
     image = np.zeros((width, height, channels))
     label_idx = 0
     for i in range(width):
         for j in range(height):
-            # TODO: Assign the right colour
-            image[i][j] = None
+            image[i][j] = codebook[labels[label_idx]]
             label_idx += 1
     return image
 
-# Display all results, alongside original image
+# Display the results, alongside original image
 plt.figure(figsize=(16,6))
 
 plt.subplot(1, 2, 1)
